@@ -41,7 +41,17 @@ elif [[ $OSTYPE == 'linux-gnu' ]]; then
       Codename=$(lsb_release -c --short)
       echo $Codename
 
-      sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ ${Codename} main';
+      if [[ $Codename == 'focal' ]]; then  #Ubuntu 21.10
+          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main';
+      elif [[ $Codename ==  'hiruste']]; then  #Ubuntu 21.04
+        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ hiruste main';
+      elif [[ $Codename == 'groovy' ]]; then  #Ubuntu 20.10
+        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ groovy main';
+      elif [[ $Codename == 'impish' ]]; then  #Ubuntu 20.04/Mint 20.x
+          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ impish main';
+      elif [[ $Codename == 'bionic' ]]; then #Ubuntu 18.04/Mint 19.x
+        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main';
+      fi
 
       sudo apt update;
       sudo apt install --install-recommends winehq-stable;
