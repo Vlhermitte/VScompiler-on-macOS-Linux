@@ -21,39 +21,4 @@ then
   fi
     echo 'installing mingw-w64'
     brew install mingw-w64;
-
-elif [[ $OSTYPE == 'linux-gnu' ]]; then
-    echo 'OSTYPE : linux'
-
-    echo 'installing mingw-w64'
-    sudo apt install mingw-w64;
-
-    if which 'wine' ; then
-        echo 'Wine is already installed'
-    else
-      echo 'Wine is not installed you need to install it'
-
-      sudo dpkg --add-architecture i386;
-
-      wget -nc https://dl.winehq.org/wine-builds/winehq.key;
-      sudo apt-key add winehq.key;
-
-      Codename=$(lsb_release -c --short)
-      echo $Codename
-
-      if [[ $Codename == 'focal' ]]; then  #Ubuntu 21.10
-          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main';
-      elif [[ $Codename ==  'hiruste']]; then  #Ubuntu 21.04
-        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ hiruste main';
-      elif [[ $Codename == 'groovy' ]]; then  #Ubuntu 20.10
-        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ groovy main';
-      elif [[ $Codename == 'impish' ]]; then  #Ubuntu 20.04/Mint 20.x
-          sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ impish main';
-      elif [[ $Codename == 'bionic' ]]; then #Ubuntu 18.04/Mint 19.x
-        sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main';
-      fi
-
-      sudo apt update;
-      sudo apt install --install-recommends winehq-stable;
-    fi
 fi
